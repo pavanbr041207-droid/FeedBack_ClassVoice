@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>College settings · ClassVoice</title>
+  <link rel="stylesheet" th:href="@{/css/classvoice.css}">
+</head>
+<body>
+  <main class="card wide">
+    <img class="logo" th:if="${logoUrl}" th:src="@{${logoUrl}}" alt="">
+    <div class="brand" th:text="${collegeName}">College</div>
+    <h1>College name and logo</h1>
+    <p><a th:href="@{/admin/home}">Back to dashboard</a></p>
+
+    <div class="msg ok" th:if="${param.saved}">College name saved.</div>
+    <div class="msg ok" th:if="${param.logoSaved}">Logo saved.</div>
+    <div class="msg error" th:if="${param.logoError != null and param.logoError[0] == 'empty'}">Choose an image file first.</div>
+    <div class="msg error" th:if="${param.logoError != null and param.logoError[0] == 'size'}">Logo is too large. Maximum is 512 KB.</div>
+    <div class="msg error" th:if="${param.logoError != null and param.logoError[0] == 'type'}">Only PNG or JPEG images are accepted.</div>
+    <div class="msg error" th:if="${param.logoError != null and param.logoError[0] == 'dimensions'}">Logo is too large in pixels. Maximum is 2000 x 2000.</div>
+
+    <h2>College name</h2>
+    <form th:action="@{/admin/settings/name}" th:object="${form}" method="post">
+      <label for="displayName">Name shown on every page</label>
+      <input id="displayName" th:field="*{displayName}" type="text" maxlength="120">
+      <div class="field-error" th:if="${#fields.hasErrors('displayName')}" th:errors="*{displayName}"></div>
+      <button type="submit">Save name</button>
+    </form>
+
+    <hr>
+
+    <h2>Logo</h2>
+    <p class="muted">PNG or JPEG, up to 512 KB and 2000 x 2000 pixels. It replaces the current logo.</p>
+    <form th:action="@{/admin/settings/logo(_csrf=${_csrf.token})}" method="post" enctype="multipart/form-data">
+      <label for="logo">Logo image</label>
+      <input id="logo" name="logo" type="file" accept="image/png,image/jpeg" required>
+      <button type="submit">Upload logo</button>
+    </form>
+  </main>
+</body>
+</html>

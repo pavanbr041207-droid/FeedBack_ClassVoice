@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teacher dashboard · ClassVoice</title>
+  <link rel="stylesheet" th:href="@{/css/classvoice.css}">
+</head>
+<body>
+  <main class="card wide">
+    <img class="logo" th:if="${logoUrl}" th:src="@{${logoUrl}}" alt="">
+    <div class="topbar">
+      <div>
+        <div class="brand" th:text="${collegeName}">College</div>
+        <h1>Teacher dashboard</h1>
+      </div>
+      <form th:action="@{/logout}" method="post">
+        <button class="ghost" type="submit">Sign out</button>
+      </form>
+    </div>
+    <p class="muted">Signed in as <span class="pill" th:text="${username}">user</span></p>
+
+    <h2>Account</h2>
+    <ul class="links">
+      
+      <li><a th:href="@{/account/password}">Change password</a></li>
+    </ul>
+
+    <h2>Planned in later sessions</h2>
+    <ul class="plan">
+      <li class="muted">Feedback results for your classes</li><li class="muted">AI-assisted analytics</li>
+    </ul>
+  </main>
+</body>
+</html>

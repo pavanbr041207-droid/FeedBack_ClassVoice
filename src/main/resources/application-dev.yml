@@ -1,0 +1,8 @@
+# Local development: zero install. File-based H2 in PostgreSQL mode (data/ is git-ignored).
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/classvoice-dev;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password: ""
+  thymeleaf:
+    cache: false

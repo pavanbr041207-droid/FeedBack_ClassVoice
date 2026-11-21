@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: classvoice
+  profiles:
+    default: dev
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+  thymeleaf:
+    cache: true
+  servlet:
+    multipart:
+      max-file-size: 600KB
+      max-request-size: 700KB
+
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: native
+  servlet:
+    session:
+      timeout: 30m
+      cookie:
+        http-only: true
+        same-site: lax
+        secure: ${COOKIE_SECURE:false}
+  error:
+    include-stacktrace: never
+    include-message: never
+
+classvoice:
+  # Never commit a real value. Set CLASSVOICE_SETUP_TOKEN in the environment.
+  setup-token: ${CLASSVOICE_SETUP_TOKEN:}
+  bcrypt-strength: 12

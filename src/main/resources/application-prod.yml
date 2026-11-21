@@ -1,0 +1,15 @@
+# Production: PostgreSQL. All values come from environment variables.
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 1
+
+server:
+  servlet:
+    session:
+      cookie:
+        secure: true

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>First-time setup · ClassVoice</title>
+  <link rel="stylesheet" th:href="@{/css/classvoice.css}">
+</head>
+<body>
+  <main class="card">
+    <div class="brand">ClassVoice</div>
+    <h1>Create the College Admin</h1>
+    <p class="muted">One-time setup. Needs the setup token from the server environment.</p>
+
+    <form th:action="@{/setup}" th:object="${form}" method="post" autocomplete="off">
+      <label for="setupToken">Setup token</label>
+      <input id="setupToken" th:field="*{setupToken}" type="password" autocomplete="off">
+      <div class="field-error" th:if="${#fields.hasErrors('setupToken')}" th:errors="*{setupToken}"></div>
+
+      <label for="displayName">Admin display name</label>
+      <input id="displayName" th:field="*{displayName}" type="text">
+      <div class="field-error" th:if="${#fields.hasErrors('displayName')}" th:errors="*{displayName}"></div>
+
+      <label for="username">Username</label>
+      <input id="username" th:field="*{username}" type="text" autocomplete="off">
+      <div class="field-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+
+      <label for="password">Password (min 10 characters)</label>
+      <input id="password" th:field="*{password}" type="password" autocomplete="new-password">
+      <div class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+
+      <label for="confirmPassword">Confirm password</label>
+      <input id="confirmPassword" th:field="*{confirmPassword}" type="password" autocomplete="new-password">
+      <div class="field-error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+
+      <button type="submit">Create admin</button>
+    </form>
+  </main>
+</body>
+</html>

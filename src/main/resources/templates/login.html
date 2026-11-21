@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · ClassVoice</title>
+  <link rel="stylesheet" th:href="@{/css/classvoice.css}">
+</head>
+<body>
+  <main class="card">
+    <img class="logo" th:if="${logoUrl}" th:src="@{${logoUrl}}" alt="">
+    <div class="brand">ClassVoice</div>
+    <h1 th:text="${collegeName}">Your College</h1>
+    <p class="muted">Sign in to continue.</p>
+
+    <div class="msg error" th:if="${param.error}">Invalid username or password.</div>
+    <div class="msg error" th:if="${param.locked}">Too many failed attempts. Try again in 15 minutes.</div>
+    <div class="msg ok" th:if="${param.logout}">You have been signed out.</div>
+    <div class="msg ok" th:if="${param.setup}">Admin account created. Sign in below.</div>
+    <div class="msg ok" th:if="${param.pwchanged}">Password changed. Sign in with the new password.</div>
+
+    <form th:action="@{/login}" method="post">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button type="submit">Sign in</button>
+    </form>
+  </main>
+</body>
+</html>
